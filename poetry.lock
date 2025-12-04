@@ -180,18 +180,6 @@ files = [
 python-dotenv = "*"
 
 [[package]]
-name = "git-filter-repo"
-version = "2.47.0"
-description = "Quickly rewrite git repository history"
-optional = false
-python-versions = ">=3.6"
-groups = ["main"]
-files = [
-    {file = "git_filter_repo-2.47.0-py3-none-any.whl", hash = "sha256:2cd04929b9024e83e65db571cbe36aec65ead0cb5f9ec5abe42158654af5ad83"},
-    {file = "git_filter_repo-2.47.0.tar.gz", hash = "sha256:411b27e68a080c07a69c233cb526dbc2d848b09a72f10477f4444dd0822cf290"},
-]
-
-[[package]]
 name = "grpcio"
 version = "1.76.0"
 description = "HTTP/2-based RPC framework"
@@ -804,4 +792,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13"
-content-hash = "3e02720a6280cd66421a8c27477b92ff3c0a3de11939f60ea194e6f191a6fd40"
+content-hash = "289fdb7d75e0d77b7c6508b1dfa9642e290442147566d6a642b013efc288143a"

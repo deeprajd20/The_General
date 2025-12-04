@@ -1,5 +1,12 @@
-from src.services.auth_grok import groq_chat
+import os
+from dotenv import load_dotenv
+from src.core.chat import Chatbot
 
-answer = groq_chat(message="what is neural networks")
+load_dotenv()
 
-print(answer)
+api_key = os.getenv("groq_api_key")
+
+bot = Chatbot(groq_api_key=api_key)
+
+response = bot.interact('what is database')
+print(response)

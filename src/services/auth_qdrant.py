@@ -1,5 +1,5 @@
 from qdrant_client import QdrantClient
-from qdrant_client.models import VectorParams, Distance
+from qdrant_client.models import VectorParams, Distance,PointStruct
 from dotenv import load_dotenv
 import os
 load_dotenv()
@@ -16,3 +16,4 @@ qdrant_client.recreate_collection(collection_name="chats_db",
                                   on_disk_payload=True)
 
 
+qdrant_client.upsert(collection_name='chats_db',points=PointStruct())
