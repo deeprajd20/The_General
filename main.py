@@ -1,6 +1,8 @@
 import os
 from dotenv import load_dotenv
 from src.core.chat import Chatbot
+from fastapi import FastAPI
+
 
 load_dotenv()
 
