@@ -16,7 +16,9 @@ class Chatbot:
         self.MODEL_NAME = Model_name
         self.cache_file_path = "src/core/cache.json"
         self.current_in_live_memory = None
-        self.messages = {}
+        self.messages = [
+            {"role":"system","content":"your are a helpful AI assistant"},
+            ]
            
 
         return None
@@ -25,7 +27,7 @@ class Chatbot:
     # def message_template():
 
 
-    def _chat_config(self,user_query, system_prompt="You are a helpful AI assistant."):
+    def _chat_config(self,messages):
         headers = {
             "Authorization": f"Bearer {self.GROQ_API_KEY}",
             "Content-Type": "application/json"
@@ -33,14 +35,12 @@ class Chatbot:
 
         data = {
             "model": self.MODEL_NAME,
-            "messages": [
-                {"role": "system", "content": system_prompt},
-                {"role": "user_prompt", "content": user_query}
-            ],
+            "messages": messages,
             "temperature": 0.3,
-            "max_tokens": 1000
+            "max_tokens": 100
         }
-
+        
+        
         response = requests.post(self.BASE_URL, headers=headers, json=data)
         id = str(uuid.uuid4())
         time_stamp = formatted_date()
@@ -87,11 +87,18 @@ class Chatbot:
             
     def interact(self,user_query):
         return_content = {}
-        query_id,timestamp,chat_response = self._chat_config(user_query)
+        self.messages.append({"role":"user","content":user_query})
+        
+        query_id,timestamp,chat_response = self._chat_config(self.messages)
+        self.messages.append({"role":"assistant","content":chat_response})
+
+        
         self._update_cache(query_id,user_query,timestamp,chat_response)
         return_content['response'] = chat_response
         return_content['current_file_size'] = self._get_file_size()
         return return_content
+    
+    
 
             
 
