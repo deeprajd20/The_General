@@ -12,4 +12,4 @@ bot = Chatbot(groq_api_key=api_key)
 @router.get("/")
 def chat():
     response = bot.interact('what is os')
-    return response
+    return {"message":response}

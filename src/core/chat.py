@@ -15,10 +15,15 @@ class Chatbot:
         self.GROQ_API_KEY =  groq_api_key
         self.MODEL_NAME = Model_name
         self.cache_file_path = "src/core/cache.json"
+        self.current_in_live_memory = None
+        self.messages = {}
            
 
         return None
     
+
+    # def message_template():
+
 
     def _chat_config(self,user_query, system_prompt="You are a helpful AI assistant."):
         headers = {
@@ -30,10 +35,10 @@ class Chatbot:
             "model": self.MODEL_NAME,
             "messages": [
                 {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_query}
+                {"role": "user_prompt", "content": user_query}
             ],
             "temperature": 0.3,
-            "max_tokens": 300
+            "max_tokens": 1000
         }
 
         response = requests.post(self.BASE_URL, headers=headers, json=data)
@@ -67,12 +72,26 @@ class Chatbot:
             json.dump(data,local_db,indent=2)
         
         return None
+    
+    def analytics_hub_cache(self):
+        with open(self.cache_file_path,"r") as local_cache_file:
+            file_content = local_cache_file.read()
+            temp_file = json.loads(file_content)
+            
+        return temp_file    
+    
+    def _get_file_size(self):
+        file_size = os.path.getsize(self.cache_file_path)
+        file_size_in_mb = file_size / (1024 * 1024)
+        return file_size_in_mb
             
     def interact(self,user_query):
+        return_content = {}
         query_id,timestamp,chat_response = self._chat_config(user_query)
         self._update_cache(query_id,user_query,timestamp,chat_response)
-
-        return chat_response
+        return_content['response'] = chat_response
+        return_content['current_file_size'] = self._get_file_size()
+        return return_content
 
             
 
