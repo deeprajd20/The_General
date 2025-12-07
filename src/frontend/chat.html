@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chat</title>
+  <style>
+    body { font-family: Arial; padding:40px; background:#eef2ff; }
+    #chat-box {
+      width: 400px; margin:auto; padding:20px;
+      background:white; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    }
+    input { width:100%; padding:12px; border-radius:6px; border:1px solid #ccc; }
+    button { width:100%; margin-top:10px; padding:12px; background:#007bff; color:white; border:none; border-radius:6px; }
+    #response { margin-top:15px; background:#f0f4ff; padding:10px; border-radius:6px; }
+  </style>
+</head>
+
+<body>
+
+<div id="chat-box">
+  <h2>Chatbot</h2>
+
+  <input id="userInput" placeholder="Type a message..." />
+  <button onclick="sendChat()">Send</button>
+
+  <div id="response"></div>
+</div>
+
+<script>
+  async function sendChat() {
+    let msg = document.getElementById("userInput").value;
+    if (!msg) return;
+
+    let res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query: msg })
+    });
+
+    let data = await res.json();
+    document.getElementById("response").innerText = data.response;
+  }
+</script>
+
+</body>
+</html>
