@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 # from api.router.home import router as home_router
 
 app = FastAPI()
-app.mount("/static", StaticFiles(directory="src/frontend"), name="static")
+app.mount("/static", StaticFiles(directory="src/ui"), name="static")
 
 app.add_middleware(
     CORSMiddleware,
@@ -22,8 +22,8 @@ app.add_middleware(
 
 @app.get("/")
 def home():
-    return FileResponse("src/frontend/index.html")
+    return FileResponse("src/ui/index.html")
 
 @app.get("/chat")
 def chat_page():
-    return FileResponse("src/frontend/chat.html")
+    return FileResponse("src/ui/chat.html")

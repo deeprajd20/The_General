@@ -1,21 +1,5 @@
 import pdfplumber
 
-
-corpus = ""
-path = "sample_data/Adaptive Screen Capture Video Analysis.pdf"
-
-
-# document_object = pdfplumber.open(path)
-# pages = [p for p in document_object.pages]
-# page_0 = pages[14]
-# images = page_0.images 
-
-# for id,page in enumerate(pages):
-#     number_of_images = len(page.images)
-#     if number_of_images != 0:
-#         print(f"Page {id} has {len(page.images)} number of images")
-
-
 class Document_Parser:
 
     def __init__(self,file_path):

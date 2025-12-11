@@ -8,4 +8,17 @@ doc_obj = parser.create_document_object()
 
 
 corpus = parser.get_corpus()
-print(info)
+
+# print(corpus[0])
+
+import re
+
+text = re.sub(r'\s+', ' ', corpus)
+text.strip()
+
+words = text.split()
+print(len(words))
+
+# chunks = []
+# start = 0
+# while start < len(corpus)
