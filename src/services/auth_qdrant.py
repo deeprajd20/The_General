@@ -17,3 +17,4 @@ qdrant_client.recreate_collection(collection_name="chats_db",
 
 
 qdrant_client.upsert(collection_name='chats_db',points=PointStruct())
+

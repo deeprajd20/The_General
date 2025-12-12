@@ -22,3 +22,25 @@ print(len(words))
 # chunks = []
 # start = 0
 # while start < len(corpus)
+def chunk_words(words, chunk_size=300, overlap=20):
+    chunks = []
+    start = 0
+
+    while start < len(words):
+        end = start + chunk_size
+        chunk = " ".join(words[start:end])
+        chunks.append(chunk)
+        start = end - overlap  # sliding window
+
+    return chunks
+
+chunks = chunk_words(words)
+print("Total chunks:", len(chunks))
+print(chunks[17])
+
+
+
+
+import qdrant_client
+
+qdrant_client
