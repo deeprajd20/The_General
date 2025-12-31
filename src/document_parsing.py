@@ -41,6 +41,13 @@ print(chunks[17])
 
 
 
-import qdrant_client
 
-qdrant_client
+from src.rag.sent_transformer import sentence_embeddder
+embeddings_corpus = []
+
+for i,c in enumerate(chunks):
+    print(f'total chunks {len(chunks)}')
+    embeddings = sentence_embeddder.encode(c)
+    embeddings_corpus.append(embeddings)
+
+
